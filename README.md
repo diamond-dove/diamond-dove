@@ -25,13 +25,13 @@ Start `docker-compose up -d`.
 Stop `docker-compose down`.
 Get into the container `docker exec -it prestame_app_1 /bin/bash`.
 
-##Local
-###requirements
+## Local
+### requirements
 - php 7.3
 - composer
 - mysql
 - redis 5.0
-###Setup
+### Setup
 1. copy .env.example file to .env `cp .env.example .env`
 2. Change .env setting
 3. Run `php artisan genarate:key`
