@@ -15,15 +15,16 @@ Following are the features provided:
 ## Docker
 1. Run `docker-compose build`
 2. Run `docker-compose up`
-3. Run `cp .env.example .env`
-4. Run `php artisan genarate:key`
-5. Run `./cb php artisan migration`
 
+## Basic docker commands
 If you want to run the docker container in background.
 
-Start `docker-compose up -d`.
-Stop `docker-compose down`.
-Get into the container `docker exec -it prestame_app_1 /bin/bash`.
+- Start `docker-compose up -d`.
+- Stop `docker-compose down`.
+- Get into the container `docker exec -it prestame_app_1 /bin/bash`.
+
+## Migrations
+1. Run `./cb php artisan migration`
 
 ## Local
 ### requirements
