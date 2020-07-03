@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/diamond-dove/diamond-dove.svg?branch=master)](https://travis-ci.org/github/diamond-dove/diamond-dove)
+[![Software License](https://img.shields.io/badge/license-APACHE-brightgreen.svg?style=flat-square)](LICENSE.txt)
+
 # Diamond-dove
 
 About diamond dove pretame
