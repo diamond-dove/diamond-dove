@@ -1,0 +1,15 @@
+#!/bin/bash
+
+OPERATION=$1
+shift
+ARGS=$*
+
+case ${OPERATION} in
+
+    "cli") docker-compose run --rm -u $UID php-cli php ${ARGS};;
+    "composer") docker-compose run --rm -u $UID composer ${ARGS};;
+    "php") docker-compose run --rm -u $UID app php ${ARGS};;
+    "npm") docker-compose run --rm -u $UID app npm ${ARGS};;
+    "web") docker exec -it nomina_app_1 /bin/bash;;
+    *) echo "Unknown operation: ${OPERATION}";;
+esac
