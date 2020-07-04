@@ -1,20 +1,27 @@
 <template>
-    <div>
-        <h1>Prestame hello world</h1>
-
-        <p>
-            <router-link :to="{ name: 'home' }">Home</router-link>
-        </p>
-
-        <div class="container">
-            <router-view></router-view>
-        </div>
+    <div >
+        <button v-if="isLogged" @click="logout" >
+            Logout
+        </button>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
-        name: "App"
+        name: "App",
+        computed: {
+            ...mapGetters([
+                'isLogged'
+            ])
+        },
+        methods: {
+            logout () {
+                this.$store.dispatch('logout')
+            }
+        }
     }
 </script>
 

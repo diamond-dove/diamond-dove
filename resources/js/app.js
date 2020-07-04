@@ -19,35 +19,20 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-import VueRouter from 'vue-router';
 import App from './views/App';
-import Home from './views/Home';
-import LoginForm from './components/LoginForm';
-import BadGateway from './pages/BadGateway';
+import router from './router';
+import store from './store';
 
-Vue.use(VueRouter);
+// Plugins
+import GlobalComponents from "./globalComponents";
+import GlobalDirectives from "./globalDirectives";
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: LoginForm
-        },
-        {
-            path: '/404',
-            name: 'BadGateway',
-            component: BadGateway
-        }
-    ],
-});
+// MaterialDashboard plugin
+import MaterialDashboard from "./material-dashboard";
 
+Vue.use(MaterialDashboard);
+Vue.use(GlobalComponents);
+Vue.use(GlobalDirectives);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -59,4 +44,21 @@ const app = new Vue({
     el: '#app',
     components: { App },
     router,
+    store,
+    created () {
+        const userInfo = localStorage.getItem('user')
+        if (userInfo) {
+            const userData = JSON.parse(userInfo)
+            this.$store.commit('setUserData', userData)
+        }
+        window.axios.interceptors.response.use(
+            response => response,
+            error => {
+                if (error.response.status === 401) {
+                    this.$store.dispatch('logout')
+                }
+                return Promise.reject(error)
+            }
+        )
+    }
 });

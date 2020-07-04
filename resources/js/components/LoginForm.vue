@@ -7,20 +7,30 @@
 
       <md-card-content>
         <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <div class="alert alert-danger" v-if="error" >
+              <button type="button" aria-hidden="true" class="close">
+                ×
+              </button>
+              <span
+              ><b> Error - </b> Su login fue invalido, verifique su usuario y contraseña</span
+              >
+            </div>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Nombre de usuario</label>
-              <md-input v-model="username" type="text"></md-input>
+              <label>Email</label>
+              <md-input v-model="email" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Password</label>
               <md-input v-model="password" type="password"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Login</md-button>
+            <md-button @click="login" class="md-raised md-success">Login</md-button>
           </div>
         </div>
       </md-card-content>
@@ -30,11 +40,42 @@
 <script>
 export default {
   name: "login-form",
+  props: {
+    dataBackgroundColor: {
+      type: String,
+      default: ""
+    }
+  },
   data() {
     return {
-      username: null,
-      password: null
+      email: null,
+      password: null,
+      error: null
     };
+  },
+  methods: {
+    login () {
+      this.$store
+              .dispatch('login', {
+                email: this.email,
+                password: this.password
+              })
+              .then(() => {
+                this.$router.push({ name: 'home' })
+              })
+              .catch(err => {
+                this.error = err;
+              })
+    },
+    loadCSRFToken() {
+      axios.get('/sanctum/csrf-cookie').then(response => {
+        // Login...
+        console.log(response);
+      });
+    }
+  },
+  mounted() {
+    this.loadCSRFToken();
   }
 };
 </script>
