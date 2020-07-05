@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Dashboardlayout from '../pages/layout/Dashboardlayout';
 import Dashboard from '../pages/Dashboard';
+import ClientList from '../pages/clients/ClientList';
 import BadGateway from '../pages/BadGateway';
 
 Vue.use(VueRouter);
@@ -21,6 +22,14 @@ const router = new VueRouter({
                     meta: {
                         hideFooter: true
                     }
+                },
+                {
+                    path: "clients",
+                    name: "Lista De Clientes",
+                    component: ClientList,
+                    meta: {
+                        hideFooter: true
+                    }
                 }
             ],
             meta: {
@@ -34,6 +43,11 @@ const router = new VueRouter({
         },
         {
             path: '/404',
+            name: 'BadGateway',
+            component: () => import(/* webpackChunkName: "BadGateway" */ '../pages/BadGateway.vue')
+        },
+        {
+            path: '*',
             name: 'BadGateway',
             component: () => import(/* webpackChunkName: "BadGateway" */ '../pages/BadGateway.vue')
         }

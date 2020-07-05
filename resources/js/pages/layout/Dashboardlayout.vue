@@ -11,6 +11,10 @@
                 <md-icon>dashboard</md-icon>
                 <p>Inicio</p>
             </sidebar-link>
+            <sidebar-link to="/clients">
+                <md-icon>person</md-icon>
+                <p>CLIENTES</p>
+            </sidebar-link>
         </side-bar>
 
 
