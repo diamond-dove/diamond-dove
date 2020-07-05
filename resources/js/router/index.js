@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Dashboardlayout from '../pages/layout/Dashboardlayout';
 import Dashboard from '../pages/Dashboard';
 import ClientList from '../pages/clients/ClientList';
+import CreateClient from '../pages/clients/CreateClient';
 import BadGateway from '../pages/BadGateway';
 
 Vue.use(VueRouter);
@@ -27,6 +28,14 @@ const router = new VueRouter({
                     path: "clients",
                     name: "Lista De Clientes",
                     component: ClientList,
+                    meta: {
+                        hideFooter: true
+                    }
+                },
+                {
+                    path: "clients/add",
+                    name: "Nuevo Cliente",
+                    component: CreateClient,
                     meta: {
                         hideFooter: true
                     }
