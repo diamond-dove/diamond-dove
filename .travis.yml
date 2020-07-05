@@ -3,6 +3,8 @@ php:
   - '7.3'
 install:
   - composer install
+  - npm install
+
 script: vendor/bin/phpunit
 before_script:
   - cp .env.travis .env
@@ -16,6 +18,8 @@ before_script:
   - sudo sed -i -e "s,www-data,travis,g" /etc/apache2/envvars
   - sudo chown -R travis:travis /var/lib/apache2/fastcgi
   - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  # Compile js & sass files
+  - npm run prod
   # configure apache virtual hosts
   - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
