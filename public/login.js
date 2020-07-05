@@ -72,7 +72,7 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password
       }).then(function () {
         _this.$router.push({
-          name: 'home'
+          name: 'Dashboard'
         });
       })["catch"](function (err) {
         _this.error = err;

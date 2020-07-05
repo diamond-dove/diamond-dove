@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home';
+import Dashboardlayout from '../pages/layout/Dashboardlayout';
+import Dashboard from '../pages/Dashboard';
 import BadGateway from '../pages/BadGateway';
 
 Vue.use(VueRouter);
@@ -10,8 +11,18 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home,
+            component: Dashboardlayout,
+            redirect: "/dashboard",
+            children: [
+                {
+                    path: "dashboard",
+                    name: "Dashboard",
+                    component: Dashboard,
+                    meta: {
+                        hideFooter: true
+                    }
+                }
+            ],
             meta: {
                 auth: true
             }
