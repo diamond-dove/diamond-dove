@@ -12,10 +12,15 @@
       </drop-down>
     </li>
     <li>
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle"
-        ><i class="material-icons">person</i>
-        <p>Profile</p></a
-      >
+      <drop-down>
+        <a slot="title" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">person</i>
+          <p>Profile</p>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a @click="logout" href="#">Logout</a></li>
+        </ul>
+      </drop-down>
     </li>
   </ul>
 </template>
@@ -28,6 +33,11 @@ export default {
       employees: [
       ]
     };
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+    }
   }
 };
 </script>

@@ -2777,6 +2777,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2784,6 +2789,11 @@ __webpack_require__.r(__webpack_exports__);
       selectedEmployee: null,
       employees: []
     };
+  },
+  methods: {
+    logout: function logout() {
+      this.$store.dispatch('logout');
+    }
   }
 });
 
@@ -43605,30 +43615,38 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm._m(0)
+    _c(
+      "li",
+      [
+        _c("drop-down", [
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-toggle",
+              attrs: { slot: "title", "data-toggle": "dropdown" },
+              slot: "title"
+            },
+            [
+              _c("i", { staticClass: "material-icons" }, [_vm._v("person")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Profile")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("ul", { staticClass: "dropdown-menu dropdown-menu-right" }, [
+            _c("li", [
+              _c("a", { attrs: { href: "#" }, on: { click: _vm.logout } }, [
+                _vm._v("Logout")
+              ])
+            ])
+          ])
+        ])
+      ],
+      1
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "dropdown-toggle",
-          attrs: { href: "#", "data-toggle": "dropdown" }
-        },
-        [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("person")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Profile")])
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
