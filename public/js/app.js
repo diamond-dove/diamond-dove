@@ -2866,6 +2866,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2876,6 +2894,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     toggleSidebar: function toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },
+    logout: function logout() {
+      this.$store.dispatch('logout');
     }
   }
 });
@@ -2902,20 +2923,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['isLogged'])),
-  methods: {
-    logout: function logout() {
-      this.$store.dispatch('logout');
-    }
-  }
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['isLogged']))
 });
 
 /***/ }),
@@ -43674,69 +43685,123 @@ var render = function() {
               "div",
               { staticClass: "md-collapse" },
               [
-                _c(
-                  "md-list",
-                  [
-                    _c("li", { staticClass: "md-list-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "md-list-item-router md-list-item-container md-button-clean dropdown",
-                          attrs: { href: "#/notifications" }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "md-list-item-content" },
-                            [
-                              _c(
-                                "drop-down",
-                                [
-                                  _c(
-                                    "md-button",
-                                    {
-                                      staticClass:
-                                        "md-button md-just-icon md-simple",
-                                      attrs: {
-                                        slot: "title",
-                                        "data-toggle": "dropdown"
-                                      },
-                                      slot: "title"
+                _c("md-list", [
+                  _c("li", { staticClass: "md-list-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "md-list-item-router md-list-item-container md-button-clean dropdown",
+                        attrs: { href: "#/notifications" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "md-list-item-content" },
+                          [
+                            _c(
+                              "drop-down",
+                              [
+                                _c(
+                                  "md-button",
+                                  {
+                                    staticClass:
+                                      "md-button md-just-icon md-simple",
+                                    attrs: {
+                                      slot: "title",
+                                      "data-toggle": "dropdown"
                                     },
-                                    [
-                                      _c("md-icon", [_vm._v("notifications")]),
-                                      _vm._v(" "),
+                                    slot: "title"
+                                  },
+                                  [
+                                    _c("md-icon", [_vm._v("notifications")]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticClass: "hidden-lg hidden-md" },
+                                      [_vm._v("Notifications")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "md-list-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "md-list-item-router md-list-item-container md-button-clean dropdown",
+                        attrs: { href: "#" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "md-list-item-content" },
+                          [
+                            _c(
+                              "drop-down",
+                              [
+                                _c(
+                                  "md-button",
+                                  {
+                                    staticClass:
+                                      "md-button md-just-icon md-simple",
+                                    attrs: {
+                                      slot: "title",
+                                      "data-toggle": "dropdown"
+                                    },
+                                    slot: "title"
+                                  },
+                                  [
+                                    _c("md-icon", [_vm._v("person")]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticClass: "hidden-lg hidden-md" },
+                                      [_vm._v("Profile")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "ul",
+                                  {
+                                    staticClass:
+                                      "dropdown-menu dropdown-menu-right"
+                                  },
+                                  [
+                                    _c("li", [
                                       _c(
-                                        "p",
-                                        { staticClass: "hidden-lg hidden-md" },
-                                        [_vm._v("Notifications")]
+                                        "a",
+                                        {
+                                          attrs: { href: "#" },
+                                          on: { click: _vm.logout }
+                                        },
+                                        [_vm._v("logout")]
                                       )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("md-list-item", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "material-icons" }, [
-                        _vm._v("person")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "hidden-lg hidden-md" }, [
-                        _vm._v("Profile")
-                      ])
-                    ])
-                  ],
-                  1
-                )
+                                    ])
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ])
+                ])
               ],
               1
             )
@@ -43769,19 +43834,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.isLogged
-        ? _c("button", { on: { click: _vm.logout } }, [
-            _vm._v("\n        Logout\n    ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("router-view")
-    ],
-    1
-  )
+  return _c("router-view")
 }
 var staticRenderFns = []
 render._withStripped = true

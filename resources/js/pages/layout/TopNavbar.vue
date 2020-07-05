@@ -55,10 +55,28 @@
               </a>
             </li>
 
-            <md-list-item href="#">
-              <i class="material-icons">person</i>
-              <p class="hidden-lg hidden-md">Profile</p>
-            </md-list-item>
+            <li class="md-list-item" >
+              <a
+                      href="#"
+                      class="md-list-item-router md-list-item-container md-button-clean dropdown"
+              >
+                <div class="md-list-item-content">
+                  <drop-down>
+                    <md-button
+                            slot="title"
+                            class="md-button md-just-icon md-simple"
+                            data-toggle="dropdown"
+                    >
+                      <md-icon>person</md-icon>
+                      <p class="hidden-lg hidden-md">Profile</p>
+                    </md-button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a @click="logout" href="#">logout</a></li>
+                    </ul>
+                  </drop-down>
+                </div>
+              </a>
+            </li>
           </md-list>
         </div>
       </div>
@@ -78,6 +96,9 @@ export default {
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },
+    logout() {
+      this.$store.dispatch('logout');
     }
   }
 };

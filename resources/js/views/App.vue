@@ -1,10 +1,5 @@
 <template>
-    <div >
-        <button v-if="isLogged" @click="logout" >
-            Logout
-        </button>
         <router-view></router-view>
-    </div>
 </template>
 
 <script>
@@ -16,11 +11,6 @@
             ...mapGetters([
                 'isLogged'
             ])
-        },
-        methods: {
-            logout () {
-                this.$store.dispatch('logout')
-            }
         }
     }
 </script>
