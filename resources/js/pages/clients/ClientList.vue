@@ -35,7 +35,7 @@
         },
         methods: {
             addClient() {
-                this.$router.push({ name: 'AddClient' });
+                this.$router.push({ name: 'Nuevo Cliente' });
             }
         }
     }

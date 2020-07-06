@@ -12,6 +12,7 @@ public/css/app.css
 public/js/app.js
 public/mix-manifest.json
 public/login.js
+public/vendors~login.js
 
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage

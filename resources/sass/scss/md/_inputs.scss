@@ -424,7 +424,7 @@ select.form-control {
     }
   }
 
-  &:not(.md-disabled):after{
+  &:not(.md-disabled & .md-invalid):after{
     background-color: #d2d2d2 !important;
   }
 

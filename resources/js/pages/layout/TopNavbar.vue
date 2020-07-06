@@ -98,7 +98,7 @@ export default {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
     logout() {
-      this.$store.dispatch('logout');
+      this.$store.dispatch('auth/signOut');
     }
   }
 };

@@ -12,31 +12,33 @@
 </template>
 
 <script>
-export default {
-  name: "simple-table",
-  props: {
-    tableHeaderColor: {
-      type: String,
-      default: ""
+  import { mapGetters } from 'vuex'
+
+  export default {
+    name: "simple-table",
+    props: {
+      tableHeaderColor: {
+        type: String,
+        default: ""
+      }
+    },
+    data() {
+      return {
+        selected: []
+      };
+    },
+    computed: {
+      ...mapGetters({
+        clients: 'client/clients'
+      })
+    },
+    methods: {
+      editClient() {
+        this.$router.push({ name: 'EditClient' });
+      }
+    },
+    created() {
+      this.$store.dispatch('client/getClients');
     }
-  },
-  data() {
-    return {
-      selected: [],
-      clients: [
-        {
-          name: "Dakota Rice",
-          debt: "$36,738",
-          sector: "Niger",
-          identifier: "500-2123207-9"
-        }
-      ]
-    };
-  },
-  methods: {
-    editClient() {
-      this.$router.push({ name: 'EditClient' });
-    }
-  }
-};
+  };
 </script>

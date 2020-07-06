@@ -24,10 +24,12 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Accept'] = 'Application/json';
+window.axios.defaults.headers.common['content-type'] = 'Application/json';
 
-window.axios.defaults.baseURL = '/api';
+axios.defaults.withCredentials = true;
 
-window.axios.defaults.withCredentials = true;
+axios.defaults.baseURL = '/';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

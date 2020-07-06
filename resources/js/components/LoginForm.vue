@@ -38,6 +38,8 @@
   </form>
 </template>
 <script>
+  import { mapActions } from 'vuex'
+
 export default {
   name: "login-form",
   props: {
@@ -54,28 +56,24 @@ export default {
     };
   },
   methods: {
-    login () {
-      this.$store
-              .dispatch('login', {
-                email: this.email,
-                password: this.password
-              })
-              .then(() => {
-                this.$router.push({ name: 'Dashboard' })
-              })
-              .catch(err => {
-                this.error = err;
-              })
-    },
-    loadCSRFToken() {
-      axios.get('/sanctum/csrf-cookie').then(response => {
-        // Login...
-        console.log(response);
-      });
+    ...mapActions({
+      signIn: 'auth/signIn'
+    }),
+    async login () {
+
+      try {
+        await this.signIn({
+          email: this.email,
+          password: this.password
+        });
+        this.$router.push({ name: 'Dashboard' });
+      } catch (e) {
+        this.error = true;
+      }
+
+
+
     }
-  },
-  mounted() {
-    this.loadCSRFToken();
   }
 };
 </script>

@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import ClientList from '../pages/clients/ClientList';
 import CreateClient from '../pages/clients/CreateClient';
 import BadGateway from '../pages/BadGateway';
+import store from '../store';
 
 Vue.use(VueRouter);
 
@@ -65,9 +66,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem('user');
-
-    if (to.matched.some(record => record.meta.auth) && !loggedIn) {
+    if (to.matched.some(record => record.meta.auth) && !store.state.auth.authenticated) {
         next('/login');
         return
     }
