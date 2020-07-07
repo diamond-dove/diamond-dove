@@ -2,7 +2,7 @@
   <md-toolbar md-elevation="0" class="md-transparent">
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">{{ $route.name }}</h3>
+        <h3 class="md-title">{{ title }}</h3>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -85,23 +85,36 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      selectedEmployee: null,
-      employees: [
-      ]
-    };
-  },
-  methods: {
-    toggleSidebar() {
-      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+  import { mapGetters } from 'vuex'
+
+  export default {
+    data() {
+      return {
+        selectedEmployee: null,
+        employees: [
+        ]
+      };
     },
-    logout() {
-      this.$store.dispatch('auth/signOut');
+    computed: {
+      ...mapGetters({
+          client: 'client/client'
+      }),
+      title () {
+        if (this.$route.name === 'EditClient') {
+          return this.client.name;
+        }
+        return this.$route.name;
+      }
+    },
+    methods: {
+      toggleSidebar() {
+        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+      },
+      logout() {
+        this.$store.dispatch('auth/signOut');
+      }
     }
-  }
-};
+  };
 </script>
 
 <style lang="css"></style>

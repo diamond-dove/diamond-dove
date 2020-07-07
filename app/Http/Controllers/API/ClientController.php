@@ -41,12 +41,15 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
         //
+        return response([
+            'client' => $client
+        ]);
     }
 
     /**
@@ -56,9 +59,13 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreClient $request, Client $client)
     {
         //
+        $client->update($request->all());
+        return response([
+            'message' => 'Client updated successfully'
+        ], 201);
     }
 
     /**

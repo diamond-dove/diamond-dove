@@ -5,7 +5,8 @@ export default {
 
     state: {
         clients: [],
-        client: null
+        client: {},
+        loaded: false
     },
 
     getters: {
@@ -16,12 +17,20 @@ export default {
         clients (state) {
             return state.clients
         },
+
+        loaded (state) {
+            return state.loaded;
+        }
     },
 
     mutations: {
 
         SET_CLIENT (state, value) {
             state.client = value;
+        },
+
+        SET_LOADED (state, value) {
+            state.loaded = value;
         },
 
         SET_CLIENTS (state, value) {
@@ -35,7 +44,14 @@ export default {
         },
 
         async updateClient ({ commit }, client) {
-           await axios.put('api/clients/' + client.id);
+           await axios.put('api/clients/' + client.id, client);
+        },
+
+        async getClient ({ commit }, client) {
+          let response = await axios.get('api/clients/' + client);
+
+            commit('SET_CLIENT', response.data.client);
+            commit('SET_LOADED', true);
         },
 
         async getClients({ commit }) {

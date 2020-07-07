@@ -4,6 +4,7 @@ import Dashboardlayout from '../pages/layout/Dashboardlayout';
 import Dashboard from '../pages/Dashboard';
 import ClientList from '../pages/clients/ClientList';
 import CreateClient from '../pages/clients/CreateClient';
+import EditClient from '../pages/clients/EditClient';
 import BadGateway from '../pages/BadGateway';
 import store from '../store';
 
@@ -37,6 +38,14 @@ const router = new VueRouter({
                     path: "clients/add",
                     name: "Nuevo Cliente",
                     component: CreateClient,
+                    meta: {
+                        hideFooter: true
+                    }
+                },
+                {
+                    path: 'clients/edit/:client',
+                    name: 'EditClient',
+                    component: EditClient,
                     meta: {
                         hideFooter: true
                     }

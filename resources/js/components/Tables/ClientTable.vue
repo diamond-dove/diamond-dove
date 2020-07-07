@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-table v-model="clients" :table-header-color="tableHeaderColor">
-      <md-table-row @click="editClient" slot="md-table-row" slot-scope="{ item }">
+      <md-table-row @click="editClient(item)" slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="Nombre">{{ item.name }}</md-table-cell>
         <md-table-cell md-label="Cedula">{{ item.identifier }}</md-table-cell>
         <md-table-cell md-label="Sector">{{ item.sector }}</md-table-cell>
@@ -33,8 +33,8 @@
       })
     },
     methods: {
-      editClient() {
-        this.$router.push({ name: 'EditClient' });
+      editClient(client) {
+        this.$router.push('clients/edit/' + client.id);
       }
     },
     created() {
