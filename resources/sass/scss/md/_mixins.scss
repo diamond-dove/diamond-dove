@@ -271,7 +271,7 @@
 
 @mixin set-background-color-button ($color){
     .nav{
-        .md-list-item-container.active {
+        .md-list-item-container.router-link-active {
             background-color: $color !important;
             @include shadow-big-color($color);
         }
