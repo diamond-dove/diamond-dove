@@ -6,6 +6,7 @@ export default {
     state: {
         clients: [],
         client: {},
+        search: "",
         loaded: false
     },
 
@@ -16,6 +17,10 @@ export default {
 
         clients (state) {
             return state.clients
+        },
+
+        search (state) {
+            return state.search;
         },
 
         loaded (state) {
@@ -35,6 +40,10 @@ export default {
 
         SET_CLIENTS (state, value) {
             state.clients = value;
+        },
+
+        SET_SEARCH (state, value) {
+            state.search = value;
         }
     },
 
@@ -54,10 +63,13 @@ export default {
             commit('SET_LOADED', true);
         },
 
-        async getClients({ commit }) {
-           let response = await axios.get('api/clients');
+        async updateSeach ({ commit }, search) {
+            commit('SET_SEARCH', search);
+        },
 
-           commit('SET_CLIENTS', response.data.clients);
+        async getClients({ commit, state }) {
+           let response = await axios.get('api/clients?search=' + state.search);
+           commit('SET_CLIENTS', response.data.data);
         }
     }
 }

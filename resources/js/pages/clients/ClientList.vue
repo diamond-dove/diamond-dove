@@ -2,11 +2,17 @@
     <div class="content">
         <div class="md-layout">
             <div
-                    class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+                    class="md-layout-item md-size-20"
             >
-                <div class="md-layout-item md-size-100 text-right">
-                    <md-button @click="addClient" class="md-raised md-success"><md-icon>person_add</md-icon> AGREGAR CLIENTE</md-button>
-                </div>
+                <md-field >
+                    <label>Buscar</label>
+                    <md-input v-model="searchModel" type="text" ></md-input>
+                </md-field>
+            </div>
+            <div
+                    class="md-layout-item md-size-80 text-right"
+            >
+                <md-button @click="addClient" class="md-raised md-success"><md-icon>person_add</md-icon> AGREGAR CLIENTE</md-button>
             </div>
             <div
                     class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
@@ -26,12 +32,28 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     import ClientTable from '../../components/Tables/ClientTable';
 
     export default {
         name: "ClientList",
         components: {
             ClientTable
+        },
+        computed: {
+            searchModel: {
+                get: function () {
+                    return this.search;
+                },
+
+                set: function (value) {
+                    this.$store.dispatch('client/updateSeach', value);
+                    this.$store.dispatch('client/getClients');
+                }
+            },
+            ...mapGetters({
+                search: 'client/search'
+            })
         },
         methods: {
             addClient() {

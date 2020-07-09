@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClient;
+use App\Http\Resources\ClientCollection;
 use App\Model\Client;
 use Illuminate\Http\Request;
 
@@ -12,14 +13,14 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return ClientCollection
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return response([
-            'clients' => Client::latest()->get()
-        ]);
+        return new ClientCollection(Client::search(
+            $request->input('search') ?? ""
+        )->get());
 
     }
 

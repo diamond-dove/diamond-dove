@@ -2,10 +2,13 @@
 
 namespace App\Model;
 
+use App\Traits\SearchAble;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+    use SearchAble;
+
     //
     protected $fillable = [
       'first_name',
@@ -14,7 +17,13 @@ class Client extends Model
       'cell_phone',
       'phone',
       'address',
-      'note'
+      'note',
+    ];
+
+    protected static $seacher_fields = [
+        'first_name',
+        'last_name',
+        'identifier',
     ];
 
     /**
