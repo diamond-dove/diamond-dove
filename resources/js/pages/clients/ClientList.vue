@@ -1,18 +1,20 @@
 <template>
     <div class="content">
         <div class="md-layout">
-            <div
-                    class="md-layout-item md-size-20"
-            >
-                <md-field >
-                    <label>Buscar</label>
-                    <md-input v-model="searchModel" type="text" ></md-input>
-                </md-field>
-            </div>
-            <div
-                    class="md-layout-item md-size-80 text-right"
-            >
-                <md-button @click="addClient" class="md-raised md-success"><md-icon>person_add</md-icon> AGREGAR CLIENTE</md-button>
+            <div class="md-layout list-content-header">
+                <div
+                        class="md-layout-item md-size-30"
+                >
+                    <md-field >
+                        <label>Buscar</label>
+                        <md-input v-model="searchModel" type="text" ></md-input>
+                    </md-field>
+                </div>
+                <div
+                        class="md-layout-item md-size-70 text-right"
+                >
+                    <md-button @click="addClient" class="md-raised md-success"><md-icon>person_add</md-icon> AGREGAR CLIENTE</md-button>
+                </div>
             </div>
             <div
                     class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
@@ -64,5 +66,4 @@
 </script>
 
 <style scoped>
-
 </style>

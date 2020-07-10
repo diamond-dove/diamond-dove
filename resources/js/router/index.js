@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Dashboardlayout from '../pages/layout/Dashboardlayout';
 import Dashboard from '../pages/Dashboard';
 import ClientList from '../pages/clients/ClientList';
+import LoanList from '../pages/loans/LoanList';
 import CreateClient from '../pages/clients/CreateClient';
 import EditClient from '../pages/clients/EditClient';
 import BadGateway from '../pages/BadGateway';
@@ -46,6 +47,14 @@ const router = new VueRouter({
                     path: 'clients/edit/:client',
                     name: 'EditClient',
                     component: EditClient,
+                    meta: {
+                        hideFooter: true
+                    }
+                },
+                {
+                    path: "loans",
+                    name: "Prestamos",
+                    component: LoanList,
                     meta: {
                         hideFooter: true
                     }
