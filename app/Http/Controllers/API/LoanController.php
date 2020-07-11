@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreClient;
-use App\Http\Resources\ClientCollection;
-use App\Model\Load;
+use App\Http\Requests\StoreLoan;
+// use App\Http\Resources\ClientCollection;
+use App\Model\Loan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
 {
@@ -28,26 +29,30 @@ class LoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreClient $request)
+    public function store(StoreLoan $request)
     {
         //
-        Client::create($request->all());
+        $loan = Loan::create($request->all());
+        $loan->client_id = $request->client_id;
+        $loan->user_id = Auth::guard()->user()->id;
+        $loan->save();
+
         return response([
-            'message' => 'Client created successfully'
+            'message' => 'Loan created successfully'
         ], 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Client  $client
+     * @param  Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(Loan $loan)
     {
         //
         return response([
-            'client' => $client
+            'loan' => $loan
         ]);
     }
 
@@ -55,15 +60,15 @@ class LoanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreClient $request, Client $client)
+    public function update(StoreLoan $request, Loan $loan)
     {
         //
-        $client->update($request->all());
+        $loan->update($request->all());
         return response([
-            'message' => 'Client updated successfully'
+            'message' => 'Loan updated successfully'
         ], 201);
     }
 

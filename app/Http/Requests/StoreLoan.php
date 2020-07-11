@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Model\Loan;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreClient extends FormRequest
+class StoreLoan extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +26,15 @@ class StoreClient extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'address' => 'required',
-            'identifier' => [
+            //
+            'amount'    => 'required',
+            'rate'      => 'required',
+            'client_id' => 'required',
+            'frequency' => [
                 'required',
-                Rule::unique('clients')->ignore($this->client)
+                Rule::in(Loan::$frequencies)
             ],
-            'cell_phone' => 'required',
+            'fee' => 'required',
         ];
     }
 }

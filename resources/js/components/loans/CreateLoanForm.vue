@@ -37,6 +37,7 @@
                             class="md-layout-item md-size-30"
                     >
                         <p><strong>Cedula: </strong>{{ client.identifier }}</p>
+                        <span class="md-error text-danger" v-if="errors.client_id" >Debe seleccionar un cliente</span>
                     </div>
                     <div
                             class="md-layout-item md-size-70"
@@ -91,9 +92,9 @@
                     <div
                             class="md-layout-item md-size-20"
                     >
-                        <md-field :class="[ errors.time ? 'md-invalid' : '']" >
+                        <md-field :class="[ errors.fee ? 'md-invalid' : '']" >
                             <label>Tiempo</label>
-                            <md-input v-model="loan.time" type="text" required></md-input>
+                            <md-input v-model="loan.fee" type="text" required></md-input>
                         </md-field>
                     </div>
                     <div class="md-layout-item md-size-100 text-right">
@@ -102,6 +103,59 @@
                 </div>
             </md-card-content>
         </md-card>
+        <md-dialog :md-active.sync="showDialog" @md-closed="redirectToLoans" @md-clicked-outside="redirectToLoans" >
+            <md-dialog-title>Prestamo Guardado Correctamente</md-dialog-title>
+            <md-dialog-content>
+                <div class="md-layout" >
+                    <div
+                            class="md-layout-item md-size-100"
+                    >
+                        <strong>Detalles de prestamo: </strong>
+                    </div>
+                    <div
+                            class="md-layout-item md-size-100"
+                    >
+                        <p><strong>Cliente: </strong>{{ client.name }}</p>
+                    </div>
+                    <div
+                            class="md-layout-item md-size-100"
+                    >
+                        <p><strong>Cedula: </strong>{{ client.identifier }}</p>
+                        <span class="md-error text-danger" v-if="errors.client_id" >Debe seleccionar un cliente</span>
+                    </div>
+                    <div
+                            class="md-layout-item md-size-70"
+                    >
+                        <p><strong>Celular: </strong>{{ client.cell_phone }}</p>
+                    </div>
+                </div>
+                <div class="md-layout" >
+                    <div
+                            class="md-layout-item md-size-40"
+                    >
+                        <p><strong>Monto: </strong>RD${{ loan.amount }}</p>
+                    </div>
+                    <div
+                            class="md-layout-item md-size-60"
+                    >
+                        <p><strong>Tipo de pago: </strong>{{ frequencyLabel.label }}</p>
+                    </div>
+                    <div
+                            class="md-layout-item md-size-40"
+                    >
+                        <p><strong>Interes: </strong>{{ loan.rate }}%</p>
+                    </div>
+                    <div
+                            class="md-layout-item md-size-60"
+                    >
+                        <p><strong>Tiempo: </strong>{{ loan.fee }} {{frequencyLabel.fee}}</p>
+                    </div>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions class="text-right">
+                <md-button class="md-raised" @click="redirectToLoans">cerrar</md-button>
+            </md-dialog-actions>
+        </md-dialog>
     </form>
 </template>
 
@@ -118,34 +172,50 @@
                 errors: {},
                 loan: {
                 },
-                showDialog: false
+                showDialog: false,
+                requesting: false,
+                frequencies: [
+                    { value: 'daily', label: 'Diario', fee: 'Dias'},
+                    { value: 'weekly', label: 'Semanal', fee: 'Semanas'},
+                    { value: 'biweekly', label: 'Quicenal', fee: 'Quincenas'},
+                    { value: 'monthly', label: 'Mensual', fee: 'Meses'}
+                ]
             };
         },
         computed: {
             ...mapGetters({
                 clientList: 'client/clients'
-            })
+            }),
+            frequencyLabel() {
+                return this.frequencies.find(frequency => frequency.value === this.loan.frequency)  || {};
+            }
         },
         methods: {
             ...mapActions({
-                saveClient: 'client/saveClient'
+                saveLoan: 'loan/saveLoan'
             }),
 
             async save () {
                 try {
-
-                    this.showDialog = true;
+                    if (!this.requesting) {
+                        this.requesting = true;
+                        this.loan.client_id = this.client.id;
+                        await this.saveLoan(this.loan);
+                        this.showDialog = true;
+                    }
                     //setTimeout(this.redirectToClients, 5000);
                 } catch (error) {
                     this.errors = error.response.data.errors;
                 }
+
+                this.requesting = false;
             },
 
             createClient () {
                 this.$router.push({ name: 'Nuevo Cliente' });
             },
 
-            redirectToClients () {
+            redirectToLoans () {
                 this.showDialog = false;
                 this.$router.push({ name: 'Prestamos' });
             },
@@ -177,6 +247,9 @@
                 });
             }
 
+        },
+        created() {
+            this.loadClients("");
         }
     }
 </script>

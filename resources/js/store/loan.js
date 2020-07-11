@@ -48,12 +48,12 @@ export default {
     },
 
     actions: {
-       async saveLoan ({ commit }, client) {
-            await axios.post('api/loans', client);
+       async saveLoan ({ commit }, loan) {
+            await axios.post('api/loans', loan);
         },
 
-        async updateClient ({ commit }, client) {
-           await axios.put('api/loans/' + client.id, client);
+        async updateClient ({ commit }, loan) {
+           await axios.put('api/loans/' + loan.id, loan);
         },
 
         async getLoan ({ commit }, client) {

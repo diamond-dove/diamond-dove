@@ -26,4 +26,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
        'clients' => 'API\ClientController'
     ]);
 
+    /*
+     * loans
+     */
+    Route::apiResources([
+        'loans' => 'API\LoanController'
+    ]);
+
 });
