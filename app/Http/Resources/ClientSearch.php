@@ -22,6 +22,8 @@ class ClientSearch extends JsonResource
             'identifier' => $this->identifier,
             'sector'     => $this->sector,
             'debt'       => $this->debt,
+            'cell_phone' => $this->cell_phone,
+            'address'    => $this->address,
         ];
     }
 }

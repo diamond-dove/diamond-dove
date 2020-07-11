@@ -70,6 +70,7 @@ export default {
         async getClients({ commit, state }) {
            let response = await axios.get('api/clients?search=' + state.search);
            commit('SET_CLIENTS', response.data.data);
+           return response.data.data;
         }
     }
 }

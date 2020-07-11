@@ -48,6 +48,17 @@ store.dispatch('auth/me').then(() => {
         el: '#app',
         components: { App },
         router,
-        store
+        store,
+        created() {
+            axios.interceptors.response.use(
+                response => response,
+                error => {
+                    if (error.response.status === 401) {
+                        location.reload();
+                    }
+                    return Promise.reject(error)
+                }
+            )
+        }
     });
 });

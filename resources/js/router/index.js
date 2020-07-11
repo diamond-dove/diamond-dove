@@ -4,6 +4,7 @@ import Dashboardlayout from '../pages/layout/Dashboardlayout';
 import Dashboard from '../pages/Dashboard';
 import ClientList from '../pages/clients/ClientList';
 import LoanList from '../pages/loans/LoanList';
+import CreateLoan from '../pages/loans/CreateLoan';
 import CreateClient from '../pages/clients/CreateClient';
 import EditClient from '../pages/clients/EditClient';
 import BadGateway from '../pages/BadGateway';
@@ -55,6 +56,14 @@ const router = new VueRouter({
                     path: "loans",
                     name: "Prestamos",
                     component: LoanList,
+                    meta: {
+                        hideFooter: true
+                    }
+                },
+                {
+                    path: "loans/add",
+                    name: "Nuevo Prestamo",
+                    component: CreateLoan,
                     meta: {
                         hideFooter: true
                     }
