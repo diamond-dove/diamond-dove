@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLoan;
-// use App\Http\Resources\ClientCollection;
+use App\Http\Resources\LoanCollection;
 use App\Model\Loan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,9 @@ class LoanController extends Controller
     public function index(Request $request)
     {
         //
-        return response([],200);
+        return new LoanCollection(Loan::search(
+            $request->input('search') ?? ""
+        )->get());
 
     }
 

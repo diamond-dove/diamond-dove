@@ -4,7 +4,7 @@
       <md-table-row @click="editLoan(item)" slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="Nombre">{{ item.name }}</md-table-cell>
         <md-table-cell md-label="Cedula">{{ item.identifier }}</md-table-cell>
-        <md-table-cell md-label="Sector">{{ item.created_at }}</md-table-cell>
+        <md-table-cell md-label="Fecha">{{ item.created_at }}</md-table-cell>
         <md-table-cell md-label="Deuda">{{ item.amount }}</md-table-cell>
       </md-table-row>
     </md-table>

@@ -39,7 +39,7 @@ export default {
         },
 
         SET_LOANS (state, value) {
-            state.loads = value;
+            state.loans = value;
         },
 
         SET_SEARCH (state, value) {
