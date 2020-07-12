@@ -3,9 +3,11 @@
 namespace App\Model;
 
 use App\Traits\SearchAble;
+use Illuminate\Database\Eloquent\Model;
 
-class Client extends SearchableModel
+class Client extends Model
 {
+    use SearchAble;
     //
     protected $fillable = [
       'first_name',
@@ -17,7 +19,7 @@ class Client extends SearchableModel
       'note',
     ];
 
-    protected $searchable = [
+    protected static $searchable = [
         'first_name',
         'last_name',
         'identifier',
@@ -58,5 +60,10 @@ class Client extends SearchableModel
     public function getDebtAttribute()
     {
         return "$0.00";
+    }
+
+    public static function getSearchableFields()
+    {
+        return self::$searchable;
     }
 }

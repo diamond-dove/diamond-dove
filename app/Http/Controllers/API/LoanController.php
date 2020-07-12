@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\Searchable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLoan;
 use App\Http\Resources\LoanCollection;
+use App\Model\Client;
 use App\Model\Loan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class LoanController extends Controller
 {
@@ -19,9 +22,14 @@ class LoanController extends Controller
     public function index(Request $request)
     {
         //
-        return new LoanCollection(Loan::search(
-            $request->input('search') ?? ""
-        )->get());
+        return new LoanCollection(Loan::whereHas('client', function (Builder $query) use($request) {
+            if ($name = $request->input("search")) {
+                $query->where("first_name", "like", '%' . $name . '%');
+                $query->orWhere("last_name", "like", '%' . $name . '%');
+            }
+
+            $query->Where("identifier", "like", '%' . ($request->input("identifier") ?? "") . '%');
+        })->get());
 
     }
 

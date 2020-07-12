@@ -4,8 +4,7 @@
 namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\MassAssignmentException;
-use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Searchable as helper;
 
 /**
  * Trait SearchAble
@@ -19,25 +18,30 @@ trait SearchAble
     protected static $model;
 
     /**
-     * @param string $q
+     * @param string $term
      * @return Builder
      */
-    public static function search(string $q = "")
+    public static function search(string $term = "")
     {
         $query = self::query();
         if(empty($q)) {
             return $query;
         }
 
+        return helper::search(self::getModel()->searchable, $query, $term);
+    }
+
+    public static function getModel()
+    {
         if (!isset(self::$model)) {
-            self::$model = new static();
+            self::$model = new self();
         }
 
-        foreach (self::$model->searchable as $field)
-        {
-            $query->orWhere($field, 'LIKE', "%$q%");
-        }
+        return self::$model;
+    }
 
-        return $query;
+    public static function getSearchableFields()
+    {
+        return self::getModel()->searchable;
     }
 }

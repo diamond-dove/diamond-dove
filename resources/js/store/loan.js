@@ -7,6 +7,7 @@ export default {
         loans: [],
         loan: {},
         search: "",
+        searchIdentifier: "",
         loaded: false
     },
 
@@ -25,6 +26,9 @@ export default {
 
         loaded (state) {
             return state.loaded;
+        },
+        searchIdentifier (state) {
+            return state.searchIdentifier;
         }
     },
 
@@ -44,6 +48,10 @@ export default {
 
         SET_SEARCH (state, value) {
             state.search = value;
+        },
+
+        SET_SEARCH_IDENTIFIER (state, value) {
+            state.searchIdentifier = value;
         }
     },
 
@@ -68,8 +76,12 @@ export default {
         },
 
         async getLoans ({ commit, state }) {
-           let response = await axios.get('api/loans?search=' + state.search);
+           let response = await axios.get('api/loans?search=' + state.search + '&identifier=' + state.searchIdentifier);
            commit('SET_LOANS', response.data.data);
+        },
+
+        updateSearchIdentifier ({ commit }, search) {
+           commit('SET_SEARCH_IDENTIFIER', search);
         }
     }
 }

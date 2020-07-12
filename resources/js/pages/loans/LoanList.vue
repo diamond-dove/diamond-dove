@@ -12,7 +12,7 @@
                 >
                     <md-field >
                         <label>Nombre</label>
-                        <md-input v-model="searchModel" type="text" ></md-input>
+                        <md-input v-model="searchName" type="text" ></md-input>
                     </md-field>
                 </div>
                 <div
@@ -20,7 +20,7 @@
                 >
                     <md-field >
                         <label>Cedula</label>
-                        <md-input v-model="searchModel" type="text" ></md-input>
+                        <md-input v-model="searchIdentifier" type="text" ></md-input>
                     </md-field>
                 </div>
                 <div
@@ -55,15 +55,46 @@
         components: {
             LoanTable
         },
+        data() {
+            return {
+                awaitingSearch: false,
+                name: "",
+                identifier: ""
+            }
+        },
         computed: {
-            searchModel: {
+            searchName: {
                 get: function () {
-                    return this.search;
+                    return this.name;
                 },
 
                 set: function (value) {
                     this.$store.dispatch('loan/updateSeach', value);
-                    this.$store.dispatch('loan/getLoans');
+                    this.name = value;
+                    if (!this.awaitingSearch) {
+                        setTimeout(() => {
+                            this.$store.dispatch('loan/getLoans');
+                            this.awaitingSearch = false;
+                        }, 1000);
+                    }
+                    this.awaitingSearch = true;
+                }
+            },
+            searchIdentifier: {
+                get: function () {
+                    return this.identifier;
+                },
+
+                set: function (value) {
+                    this.$store.dispatch('loan/updateSearchIdentifier', value);
+                    this.identifier = value;
+                    if (!this.awaitingSearch) {
+                        setTimeout(() => {
+                            this.$store.dispatch('loan/getLoans');
+                            this.awaitingSearch = false;
+                        }, 1000);
+                    }
+                    this.awaitingSearch = true;
                 }
             },
             ...mapGetters({
